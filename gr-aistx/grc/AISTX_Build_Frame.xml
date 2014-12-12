@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<block>
+  <name>AIS Frame Builder</name>
+  <key>AISTX_Build_Frame</key>
+  <category>AISTX</category>
+  <import>import AISTX</import>
+  <make>AISTX.Build_Frame($sentence, $repeat, $enable_NRZI)</make>
+    <param>
+		<name>Sentence</name>
+		<key>sentence</key>
+		<value>010010000011101011110111001110011000100000000000000000100000001011001000001011000101000110100010010100001101011001111011000011111111111011100101110011100000000000000110</value>
+		<type>string</type>
+   </param>
+   <param>
+	<name>Repeat</name>
+	<key>repeat</key>
+	<value>True</value>
+	<type>enum</type>
+	<option>
+		<name>Yes</name>
+		<key>True</key>
+	</option>
+	<option>
+		<name>No</name>
+		<key>False</key>
+	</option>
+  </param>
+   <param>
+	<name>Enable_NRZI_Conversion</name>
+	<key>enable_NRZI</key>
+	<value>True</value>
+	<type>enum</type>
+	<option>
+		<name>Yes</name>
+		<key>True</key>
+	</option>
+	<option>
+		<name>No</name>
+		<key>False</key>
+	</option>
+  </param>  
+  
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

@@ -1,0 +1,24 @@
+
+This directory contains a custom block for GnuRadio we called AIS Frame Builder.
+It is part of the AIS BlackToolkit.
+ 
+This block serves as generator of AIS frames and implements the full AIS stack.
+It is composed of three main components covering respectively the 
+application/presentation layers, the link layer and the physical layer, 
+as defined in the protocol specification for AIS.
+
+Install as described in the official out-of-tree documentation, i.e.:
+
+$ mkdir build
+$ cd build
+$ cmake ../
+$ make
+$ sudo make install 
+
+Copyright 2013-2014 -- Embyte & Pastus
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+

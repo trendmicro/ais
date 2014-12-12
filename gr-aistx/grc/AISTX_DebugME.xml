@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<block>
+  <name>DebugME</name>
+  <key>AISTX_DebugME</key>
+  <category>AISTX</category>
+  <import>import AISTX</import>
+  <make>AISTX.DebugME($type.size)</make>
+	<param>
+		<name>Input Type</name>
+		<key>type</key>
+		<type>enum</type>
+		<option>
+			<name>Complex</name>
+			<key>complex</key>
+			<opt>size:gr.sizeof_gr_complex</opt>
+		</option>
+		<option>
+			<name>Float</name>
+			<key>float</key>
+			<opt>size:gr.sizeof_float</opt>
+		</option>
+		<option>
+			<name>Byte</name>
+			<key>byte</key>
+			<opt>size:gr.sizeof_char</opt>
+		</option>
+	</param>
+	<sink>
+		<name>in</name>
+		<type>$type</type>
+	</sink>
+</block>
