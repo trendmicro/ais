@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include "nrz_to_nrzi_impl.h"
 #include <stdio.h>
 
@@ -40,9 +40,9 @@ namespace gr {
      * The private constructor
      */
     nrz_to_nrzi_impl::nrz_to_nrzi_impl()
-      : gr_block("nrz_to_nrzi",
-		      gr_make_io_signature(1, 1, sizeof(unsigned char)),
-		      gr_make_io_signature(1, 1, sizeof(unsigned char)))
+      : gr::block("nrz_to_nrzi",
+		      gr::io_signature::make(1, 1, sizeof(unsigned char)),
+		      gr::io_signature::make(1, 1, sizeof(unsigned char)))
     {}
 
     /*

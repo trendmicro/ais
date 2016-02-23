@@ -23,7 +23,7 @@
 #define INCLUDED_AISTX_NRZ_TO_NRZI_H
 
 #include <AISTX/api.h>
-#include <gr_block.h>
+#include <gnuradio/blocks/null_source.h>
 
 namespace gr {
   namespace AISTX {
@@ -33,7 +33,7 @@ namespace gr {
      * \ingroup AISTX
      *
      */
-    class AISTX_API nrz_to_nrzi : virtual public gr_block
+    class AISTX_API nrz_to_nrzi : virtual public gr::block
     {
      public:
       typedef boost::shared_ptr<nrz_to_nrzi> sptr;

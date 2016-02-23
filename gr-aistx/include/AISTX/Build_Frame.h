@@ -23,7 +23,7 @@
 #define INCLUDED_AISTX_BUILD_FRAME_H
 
 #include <AISTX/api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 
 namespace gr {
   namespace AISTX {
@@ -33,7 +33,7 @@ namespace gr {
      * \ingroup AISTX
      *
      */
-    class AISTX_API Build_Frame : virtual public gr_sync_block
+    class AISTX_API Build_Frame : virtual public gr::sync_block
     {
      public:
       typedef boost::shared_ptr<Build_Frame> sptr;
