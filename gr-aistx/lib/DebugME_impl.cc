@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include "DebugME_impl.h"
 #include <stdio.h>
 
@@ -40,9 +40,9 @@ namespace gr {
      * The private constructor
      */
     DebugME_impl::DebugME_impl(size_t itemsize)
-      : gr_block("DebugME",
-		      gr_make_io_signature(1, 1, itemsize),
-		      gr_make_io_signature(0, 0, 0)),
+      : gr::block("DebugME",
+		      gr::io_signature::make(1, 1, itemsize),
+		      gr::io_signature::make(0, 0, 0)),
 		      d_itemsize(itemsize)
     {}
 

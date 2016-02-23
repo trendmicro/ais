@@ -22,7 +22,7 @@
 #ifndef INCLUDED_AISTX_API_H
 #define INCLUDED_AISTX_API_H
 
-#include <gruel/attributes.h>
+#include <gnuradio/attributes.h>
 
 #ifdef gnuradio_AISTX_EXPORTS
 #  define AISTX_API __GR_ATTR_EXPORT

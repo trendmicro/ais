@@ -30,7 +30,7 @@ list(APPEND AISTX_sources
     DebugME_impl.cc )
 
 add_library(gnuradio-AISTX SHARED ${AISTX_sources})
-target_link_libraries(gnuradio-AISTX ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES})
+target_link_libraries(gnuradio-AISTX ${Boost_LIBRARIES} ${GNURADIO_RUNTIME_LIBRARIES})
 set_target_properties(gnuradio-AISTX PROPERTIES DEFINE_SYMBOL "gnuradio_AISTX_EXPORTS")
 
 ########################################################################
@@ -58,7 +58,7 @@ add_executable(test-AISTX ${test_AISTX_sources})
 
 target_link_libraries(
   test-AISTX
-  ${GNURADIO_CORE_LIBRARIES}
+  ${GNURADIO_RUNTIME_LIBRARIES}
   ${Boost_LIBRARIES}
   ${CPPUNIT_LIBRARIES}
   gnuradio-AISTX
