@@ -111,6 +111,7 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${CPPUNIT_INCLUDE_DIRS}
     ${GNURADIO_RUNTIME_INCLUDE_DIRS}
+    ${GNURADIO_RUNTIME_INCLUDE_DIRS}/gnuradio/swig
 )
 
 link_directories(
