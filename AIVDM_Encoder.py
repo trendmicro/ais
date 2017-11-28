@@ -128,7 +128,7 @@ def encode_18(__mmsi, __speed, __long, __lat, __course, __ts):
 
 def encode_20(__mmsi, __offset, __slots, __timeout, __increment):
 	_type = '{0:b}'.format(20).rjust(6,'0')				#
-	_repeat = '00'										# repeat (directive to an AIS transceiver that this message should be rebroadcast.)
+	_repeat = '00'										# repeat (count of how many times this msg has been repeated)
 	_mmsi = '{0:b}'.format(__mmsi).rjust(30,'0')		# 30 bits (247320162)
 
 	_offset = '{0:b}'.format(__offset).rjust(12,'0')
@@ -137,6 +137,45 @@ def encode_20(__mmsi, __offset, __slots, __timeout, __increment):
 	_increment = '{0:b}'.format(__increment).rjust(11,'0')
 
 	return 	_type+_repeat+_mmsi+'00'+_offset+_slots+_timeout+_increment+'00'
+
+def encode_21(__mmsi, __aid_type, __aid_name, __long, __lat, __vsize, __virtual):
+	_type = '{0:b}'.format(21).rjust(6,'0')
+	_repeat = '00'										# repeat (directive to an AIS transceiver that this message should be rebroadcast.)
+	_mmsi = '{0:b}'.format(__mmsi).rjust(30,'0')		# 30 bits (247320162)
+
+	_aid_type = '{0:b}'.format(__aid_type).rjust(5,'0')
+	if len(__aid_name) <= 20:
+		_name = encode_string(__aid_name).rjust(120,'0')
+		_name_ext = ''
+	else:
+		__aid_name = str.strip(__aid_name,'@')
+		if len(__aid_name) <= 20:
+			_name = encode_string(__aid_name).rjust(120,'0')
+			_name_ext = ''
+		else:
+			_name = encode_string(__aid_name[:20])
+			_name_ext =  encode_string(__aid_name[20:])
+			_name_ext += ''.rjust(len(_name_ext) % 8, '0')
+			print _name_ext
+
+	_accurancy = '0'
+
+	(_long, _lat) = compute_long_lat(__long, __lat)
+
+	if not __virtual:
+		_hl = int(__vsize[:__vsize.find("x")])/2		# AIS antenna in the middle
+		_hw = int(__vsize[__vsize.find("x")+1:])/2
+		_half_length = '{0:b}'.format(_hl).rjust(9,'0')
+		_half_width = '{0:b}'.format(_hw).rjust(6,'0')
+	else:
+		_half_length = '000000000'
+		_half_width = '000000'
+
+	_fix = '0000'
+	_time = '{0:b}'.format(60).rjust(6,'0')
+	_virtual = '{0:b}'.format(int(__virtual))
+
+	return _type + _repeat + _mmsi + _aid_type + _name + _accurancy + _long + _lat + _half_length + _half_length + _half_width + _half_width + _fix + _time + '1000000000' + _virtual + '00' + _name_ext
 
 
 def encode_22(__mmsi, __channel_a, __channel_b, __ne_lon, __ne_lat, __sw_lon, __sw_lat):
@@ -239,7 +278,7 @@ def main():
 	parser.add_option("--fatdmaincrement",  help="20. Increment, default = 0", default=0)
 
 	parser.add_option("--v_AtoN",help="21. Specify that the AtoN is virtual, default = real.", action="store_true")
-	parser.add_option("--aid_type", help="21. Type of AtoN (light, bouye)", default=1)
+	parser.add_option("--aid_type", help="21. Type of AtoN (light, bouye)", default=0)
 	parser.add_option("--aid_name", help="21. Name of AtoN", default="@@@@@@@@@@@@@@@@@@@@")
 
 	parser.add_option("--channel_a", help="22. Specify channel frequency for A, default = 2087 (87B = 161.975 MHz). Ref ITU-R M.1084", default=2087)
