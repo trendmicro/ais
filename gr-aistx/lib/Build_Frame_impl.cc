@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include "Build_Frame_impl.h"
 
 #include <stdio.h>	
@@ -53,9 +53,9 @@ namespace gr {
      * The private constructor
      */
     Build_Frame_impl::Build_Frame_impl(const char *sentence, bool repeat, bool enable_NRZI)
-      : gr_sync_block("Build_Frame",
-		      gr_make_io_signature(0, 0, 0),
-		      gr_make_io_signature(1, 1, sizeof(unsigned char))),
+      : gr::sync_block("Build_Frame",
+		      gr::io_signature::make(0, 0, 0),
+		      gr::io_signature::make(1, 1, sizeof(unsigned char))),
 		      d_repeat(repeat),
 		      d_enable_NRZI(enable_NRZI)
     {

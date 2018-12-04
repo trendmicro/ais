@@ -23,7 +23,9 @@
 #define INCLUDED_AISTX_DEBUGME_H
 
 #include <AISTX/api.h>
-#include <gr_block.h>
+#include <gnuradio/blocks/null_source.h>
+
+
 
 namespace gr {
   namespace AISTX {
@@ -33,7 +35,7 @@ namespace gr {
      * \ingroup AISTX
      *
      */
-    class AISTX_API DebugME : virtual public gr_block
+    class AISTX_API DebugME : virtual public gr::block
     {
      public:
       typedef boost::shared_ptr<DebugME> sptr;
