@@ -424,6 +424,9 @@ namespace gr {
 
 			//// frame generation /////	
 			int LEN_FRAME = LEN_PREAMBLE + LEN_START*2 + LEN_STUFFED_PAYLOAD;
+			//Make len_frame even 
+			while(LEN_FRAME%8 != 0)
+				LEN_FRAME++;
 			char frame[LEN_FRAME];
 			unsigned char byte_frame[LEN_FRAME/8]; //PASTA
 			memset (frame, 0x0, LEN_FRAME);	
