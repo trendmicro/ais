@@ -37,11 +37,11 @@ def compute_long_lat22 (__long, __lat):
 	_lat =  '{0:b}'.format(int(round(__lat*600))  & 0b11111111111111111).rjust(17,'0')
 	return (_long, _lat)
 
-def encode_1(__mmsi, __speed, __long, __lat, __course, __ts):
+def encode_1(__mmsi, __status,__speed, __long, __lat, __course, __ts):
 	_type = '{0:b}'.format(1).rjust(6,'0')				# 18
 	_repeat = "00"										# repeat (directive to an AIS transceiver that this message should be rebroadcast.)
 	_mmsi = '{0:b}'.format(__mmsi).rjust(30,'0')		# 30 bits (247320162)
-	_status = '{0:b}'.format(15).rjust(4,'0')			# status not defined
+	_status = '{0:b}'.format(__status).rjust(4,'0')			#  navigation status e.g. 0=Under way using engine, 1-At anchor, 5=Moored, 8=Sailing,15=undefined
 	_rot = '{0:b}'.format(128).rjust(8,'0')				# rate of turn not defined
 
 	_speed = '{0:b}'.format(int(round(__speed*10))).rjust(10,'0')	# Speed over ground is in 0.1-knot resolution from 0 to 102 knots. value 1023 indicates speed is not available, value 1022 indicates 102.2 knots or higher.
@@ -268,6 +268,7 @@ def main():
 	                                                970010000 for SART device""",
 	                                                default=247320162)
 	parser.add_option("--speed",  help="18. Speed (knot), default = 0.1", default=0.1)
+	parser.add_option("--status", help="1. Navigation Status, default = 15 (undefined)", default=15)
 	parser.add_option("--long",   help="18. Longitude, default = 9.72357833333333", default=9.72357833333333)
 	parser.add_option("--lat",    help="18. Latitude, default = 45.6910166666667", default=45.6910166666667)
 	parser.add_option("--course", help="18. Course, default = 83.4", default=83.4)
@@ -309,7 +310,7 @@ def main():
 	payload = ""
 
 	if options.type == "1":
-		payload = encode_1(int(options.mmsi), float(options.speed), float(options.long), float(options.lat), float(options.course), int(options.ts))
+		payload = encode_1(int(options.mmsi),int(options.status), float(options.speed), float(options.long), float(options.lat), float(options.course), int(options.ts))
 
 	elif options.type == "4":
 		payload = encode_4(int(options.mmsi), float(options.speed), float(options.long), float(options.lat), float(options.course), int(options.ts))
