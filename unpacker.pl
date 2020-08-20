@@ -149,7 +149,7 @@ for ($i=$n; $i<$len; $i++)
 
 # Ensure that $sum is two upper-case hex digits
 
-  $sum = sprintf ("%2X", $sum);
+  $sum = sprintf ("%02X", $sum);
   return $sum;
 }
 
